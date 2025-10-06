@@ -15,7 +15,7 @@ Below are the courses for which resources are currently available. More courses 
   - Within topics, I’ve tried to sort them from **easier to harder**, though some may be less structured.
 - **Lab Assignments**:  
   - Includes task PDFs.  
-  - **Solutions are not directly provided** — this is to encourage you to code on your own and truly understand the material.
+  - **Solutions are not directly provided** - this is to encourage you to code on your own and truly understand the material.
 - **Download Folder**:  
   [📥 Download CSE110 Folder](https://downgit.github.io/#/home?url=https://github.com/taseencr/Bracu-CSE-Resources/tree/main/CSE110)
 
@@ -23,7 +23,7 @@ Below are the courses for which resources are currently available. More courses 
 
 ## Why This Repository Exists
 
-I wanted to create a central place for resources that can help fellow BRACU CSE students without simply giving away answers. Learning comes from practicing, not copy-pasting! 💻❤️
+I wanted to create a central place for resources that can help fellow BRACU CSE students **learn and understand concepts** without simply giving away ready-made lab solutions. The codes are meant for reference and practice, while lab assignments are left unsolved to encourage real learning and prevent copy-pasting. 💻❤️
 
 ---
 
