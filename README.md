@@ -19,6 +19,10 @@ Below are the courses for which resources are currently available. More courses 
 - **Download Folder**:  
   [📥 Download CSE110 Folder](https://downgit.github.io/#/home?url=https://github.com/taseencr/Bracu-CSE-Resources/tree/main/CSE110)
 
+
+### **CSE111 (Programming Language II)**
+- **Download Folder**:  
+  [📥 Download CSE111 Folder](https://downgit.github.io/#/home?url=https://github.com/taseencr/Bracu-CSE-Resources/tree/main/CSE111)
 ---
 
 ## Why This Repository Exists
