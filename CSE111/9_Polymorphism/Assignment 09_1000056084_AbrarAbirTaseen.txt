@@ -1,0 +1,202 @@
+// TASK 1
+public class SmartSecurityCamera extends SmartDevice{
+  int storage;
+  int currentstr;
+  boolean isIR;
+  
+  public SmartSecurityCamera(String name, int bat, int str){
+    super(name, bat);
+    storage = str;
+    currentstr = str;
+  }
+  
+  public void powerOn(){
+    if(currentstr<=0) System.out.println("Error: " + deviceName + " storage full.\nRecording disabled.");
+    else super.powerOn();
+  }
+  
+  public void record(){
+    if(currentstr>0){
+      System.out.println("Recording standard footage.");
+      currentstr--;
+    }
+    else System.out.println("Error: " + deviceName + " storage full.\nRecording disabled.");
+  }
+  public void record(boolean isIR){
+    if(isIR){
+      this.isIR = true;
+      System.out.println("[IR SENSORS ACTIVE]");
+      record();
+    }
+    else record();
+  }
+  
+  public void formatCard(String pass){
+    System.out.println("REQUEST: Format SD Card initiated.");
+    if(isActive){
+      if(pass.equals("ADMIN123")){
+        currentstr = storage;
+        System.out.println("Auth Success. Wiping data.\nSUCCESS: Storage restored to " + storage + "GB.");
+      }
+      else System.out.println("ACCESS DENIED: Incorrect PIN.");
+    }
+    else System.out.println("ERROR: Device must be ON to format.");
+  }
+  
+  public void powerOff(){
+    if(isIR){
+      isIR = false;
+      System.out.println("Turning off Night Vision.");
+    }
+    super.powerOff();
+  }
+}
+
+
+
+// TASK 2
+public class UpsideDown extends Hawkins{
+  Hawkins bridge1;
+  Hawkins bridge2;
+  static int totalBridges = 0;
+  
+  public UpsideDown(String name){
+    super(name);
+  }
+  
+  public Hawkins getBridge1(){
+    return bridge1;
+  }
+  public Hawkins getBridge2(){
+    return bridge2;
+  }
+  
+  public void connect(Hawkins obj){
+    if(bridge1==null){
+      bridge1 = obj;
+      totalBridges++;
+    }
+    else if(bridge2==null){
+      bridge2 = obj;
+      totalBridges++;
+    }
+    else System.out.println("No further bridges with " + name);
+  }
+  
+  public void disconnect(int num){
+    if(num==1){
+      bridge1 = null;
+      totalBridges--;
+    }
+    else if(num==2){
+      bridge2 = null;
+      totalBridges--;
+    }
+    else System.out.println("Invalid bridge number!");
+  }
+  
+  public void details(){
+    System.out.println(name + " Details: ");
+    if(bridge1!=null){
+      System.out.println("Bridge 1: " + bridge1.name);
+      if(bridge2!=null){
+        System.out.println("Bridge 2: " + bridge2.name);
+      }
+    }
+  }
+  
+  public void activate(Hawkins obj){
+    System.out.println("Activating the door of " + obj.name);
+    obj.status = true;
+  }
+}
+
+
+
+// TASK 3
+public class Car extends Vehicle{
+  String model;
+  int doors;
+  boolean isAI;
+  
+  public Car(String brand, String model, int year, int doors, int wheels, boolean isAI){
+    super(brand, year);
+    setWheels(wheels);
+    this.model = model;
+    this.doors = doors;
+    this.isAI = isAI;
+  }
+  
+  public void startAutoPilot(){
+    if(isAI) System.out.println(getBrand() + ":" + model + " AutoPilot Started");
+    else System.out.println(getBrand() + ":" + model + " has NO AutoPilot");
+  }
+  
+  public String toString(){
+    String s = "Car " + super.toString();
+    s += ", Model: " + model + ", Doors: " + doors + ", AI: " + isAI;
+    return s;
+  }
+}
+
+
+public class Bike extends Vehicle{
+  String model;
+  boolean hasSideCar;
+  
+  public Bike(String brand, String model, int year, int wheels, boolean hasSideCar){
+    super(brand, year);
+    setWheels(wheels);
+    this.model = model;
+    this.hasSideCar = hasSideCar;
+  }
+  
+  public void doAWheelie(){
+    if(hasSideCar) System.out.println("Wheelie Failed. " + getBrand() + ":" + model + " has SideCar");
+    else System.out.println(getBrand() + ":" + model + " is doing Wheelie!!");
+  }
+  
+  public String toString(){
+    String s = "Bike " + super.toString();
+    s += ", Model: " + model + ", SideCar: " + hasSideCar;
+    return s;
+  }
+}
+
+
+public class Garage{
+  Car cars[];
+  Bike bikes[];
+  int bcount, bmax;
+  int ccount, cmax;
+  
+  public Garage(int ccap, int bcap){
+    this.cars = new Car[ccap];
+    this.bikes = new Bike[bcap];
+    cmax = ccap;
+    bmax = bcap;
+    System.out.println("Welcome to the Garage!");
+    System.out.println("Car Capacity: " + ccap);
+    System.out.println("Bike Capacity: " + bcap);
+  }
+  
+  public void addVehicle(Vehicle obj){
+    if(obj instanceof Car){
+      if(ccount<cmax){
+        cars[ccount] = (Car)obj;
+        ccount++;
+        System.out.println("A " + obj.getBrand() + " CAR has been added to the Garage");
+      }
+      else System.out.println("Can't add more Cars! Capacity: " + cmax);
+    }
+    else if(obj instanceof Bike){
+      if(bcount<bmax){
+        bikes[bcount] = (Bike)obj;
+        bcount++;
+        System.out.println("A " + obj.getBrand() + " BIKE has been added to the Garage");
+      }
+      else System.out.println("Can't add more bikes! Capacity: " + bmax);
+    }
+  }
+}
+

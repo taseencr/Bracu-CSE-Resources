@@ -1,0 +1,331 @@
+// TASK 1
+public class Butterfly extends Caterpillar{
+  public Butterfly(String food, int age){
+    super(food, age);
+  }
+  
+  public void transform(){
+    System.out.println("Caterpillar transforms into Butterfly");
+  }
+  
+  public void eat(int amount){
+    energy += (amount*5)-5;
+    System.out.println("Butterfly lost energy while flying and absorbed nectar");
+  }
+  
+  public void showDetails(){
+    System.out.println("Food: " + food);
+    System.out.println("Age: " + age);
+    System.out.println("Energy: " + energy + " joules");
+  }
+}
+
+
+public class Moth extends Caterpillar{
+  public Moth(String food, int age){
+    super(food, age);
+  }
+  
+  public void transform(){
+    System.out.println("Caterpillar transforms into Moth");
+  }
+  
+  public void eat(int amount){
+    energy += (amount*2.5)-2.5;
+    System.out.println("Moth lost energy due to nocturnal activity");
+  }
+  
+  public void showDetails(){
+    System.out.println("Food: " + food);
+    System.out.println("Age: " + age);
+    System.out.println("Energy: " + energy + " joules");
+  }
+}
+
+
+
+// TASK 2
+public class Concert{
+  static int tcount;
+  String venue;
+  String time;
+  int tickets;
+  String artists[] = new String[5];
+  int count;
+  
+  public Concert(String venue, String time){
+    this.venue = venue;
+    this.time = time;
+  }
+  
+  public void showDetails(){
+    System.out.println("Venue: " + venue);
+    System.out.println("Showtime: " + time);
+    System.out.println("Artist:");
+    for(int i=0; i<count; i++){
+      System.out.println("-" + artists[i]);
+    }
+    System.out.println("Tickets sold in this concert: " + tickets);
+  }
+  
+  public void addArtist(String artist){
+    if(count<5){
+      artists[count] = artist;
+      count++;
+    }
+  }
+  
+  public void buyTicket(String zone, int quantity){
+    int price = 0;
+    if(zone.equals("A")) price = quantity*500;
+    else if(zone.equals("B")) price = quantity*1000;
+    System.out.println("Total price: " + price);
+    tickets += quantity;
+    tcount += quantity;
+  }
+  public void buyTicket(String zone){
+    buyTicket(zone, 1);
+  }
+  
+  public static void showTotalTicketsSold(){
+    System.out.println("Total tickets sold (all venues): " + tcount);
+  }
+}
+
+
+public class VIPConcert extends Concert{
+  public VIPConcert(String venue, String time){
+    super(venue, time);
+  }
+  
+  public void buyTicket(){
+    System.out.println("Total price: 2000");
+    tickets++;
+    tcount++;
+  }
+}
+
+
+
+// TASK 3
+public class BikeDriver extends GenericDriver{
+  String profile;
+  static String restrictedAreas[] = new String[3];
+  static int count;
+  
+  public BikeDriver(String name, String profile){
+    super(name);
+    this.profile = profile;
+  }
+  
+  public String toString(){
+    return getName() + "'s driver profile is " + profile;
+  }
+  
+  public String acceptRide(boolean hasVehicle){
+    return super.acceptRide(hasVehicle) + "\n" + this;
+  }
+  
+  public static void restrictedAreas(String res){
+    restrictedAreas[count] = res;
+    count++;
+  }
+  
+  public void fightRestriction(String res[]){
+    for(int i=0; i<res.length; i++){
+      boolean cantEnter = false;
+      for(int j=0; j<restrictedAreas.length; j++){
+        if(res[i].equals(restrictedAreas[j])){
+          cantEnter = true;
+          break;
+        }
+      }
+      if(cantEnter) System.out.println(getName() + " cannot enter " + res[i]);
+      else System.out.println(getName() + " can enter " + res[i]);
+    }
+  }
+}
+
+
+public class CarDriver extends GenericDriver{
+  static String restrictedAreas[] = new String[2];
+  static int count;
+  
+  public CarDriver(String name){
+    super(name);
+  }
+  
+  public String toString(){
+    return getName() + "'s driver profile is a Premium";
+  }
+  
+  public String acceptRide(boolean hasVehicle){
+    return super.acceptRide(hasVehicle) + "\n" + getName() + "'s driver profile is Premium";
+  }
+  
+  public void hasSafetyTraining(){
+    super.hasSafetyTraining();
+    System.out.println("Premium drivers receive extra safety briefings.");
+  }
+  
+  public static void restrictedAreas(String res){
+    restrictedAreas[count] = res;
+    count++;
+  }
+  
+  public void fightRestriction(String res[]){
+    for(int i=0; i<res.length; i++){
+      boolean cantEnter = false;
+      for(int j=0; j<restrictedAreas.length; j++){
+        if(res[i].equals(restrictedAreas[j])){
+          cantEnter = true;
+          break;
+        }
+      }
+      if(cantEnter) System.out.println(getName() + " cannot enter " + res[i]);
+      else System.out.println(getName() + " can enter " + res[i]);
+    }
+  }
+}
+
+
+
+// TASK 4
+public class Car extends Vehicle{
+  static Car cars[] = new Car[3];
+  static int count;
+  static int idH = 1;
+  int seats;
+  
+  public Car(String model, int price, int seats){
+    super(model, price);
+    this.seats = seats;
+    vehicleId = "CAR00" + idH;
+    idH++;
+    cars[count] = this;
+    count++;
+    System.out.println("Vehicle ID: " + vehicleId + " created");
+  }
+  
+  public void vehicleDetail(){
+    super.vehicleDetail();
+    System.out.println("Type: Regular Car");
+    System.out.println("Seats: " + seats);
+  }
+  
+  public static void showAllAvailableCars(){
+    System.out.println("Total Car: " + count);
+    System.out.println("Available Cars: ");
+    for(int i=0; i<count; i++){
+      System.out.println(cars[i].vehicleId + " : " + cars[i].model);
+    }
+  }
+  
+  public static void markAsSold(Car car){
+    for(int i=0; i<count; i++){
+      if(car==cars[i]){
+        cars[i].sold = true;
+      }
+    }
+  }
+  
+  public static void showAllCars(){
+    System.out.println("Total Car: " + count);
+    for(int i=0; i<count; i++){
+      String status = "";
+      if(cars[i].sold) status = "sold";
+      else status = "available";
+      System.out.println(cars[i].vehicleId + " : " + cars[i].model + " - " + status);
+    }
+  }
+}
+
+
+public class ElectricCar extends Vehicle{
+  static int count;
+  static ElectricCar ev[] = new ElectricCar[3];
+  int batCap;
+  
+  public ElectricCar(String model, int price, int batCap){
+    super(model, price);
+    vehicleId = "EV000";
+    this.batCap = batCap;
+    ev[count] = this;
+    count++;
+    System.out.println("Vehicle ID: " + vehicleId + " created");
+  }
+  
+  public void vehicleDetail(){
+    super.vehicleDetail();
+    System.out.println("Type: Electric Vehicle");
+    System.out.println("Battery Capacity: " + batCap + " kWh");
+  }
+  
+  public static void markAsSoldEV(ElectricCar car){
+    for(int i=0; i<count; i++){
+      if(car==ev[i]){
+        ev[i].sold = true;
+      }
+    }
+  }
+}
+
+
+
+// TASK 5
+public class Manager extends Employee{
+  double bonus;
+  double tSalary;
+  
+  public Manager(String name, double baseSalary, int hoursWorked, double bonus){
+    super(name, baseSalary, hoursWorked);
+    this.bonus = bonus;
+  }
+  
+  public void calculateSalary(){
+    if(getHoursWorked()>40) bonus = 10;
+    tSalary = getBaseSalary() + getBaseSalary()*bonus/100;
+  }
+  
+  public void displayInfo(){
+    super.displayInfo();
+    System.out.println("Bonus: " + bonus + " %");
+    System.out.println("Final Salary: $" + tSalary);
+
+  }
+  
+  public void requestIncrement(int inc){
+    if(getHoursWorked()>100){
+      setBaseSalary(getBaseSalary()+inc);
+      System.out.println("$" + inc + " Increment approved.");
+    }
+    else if(getHoursWorked()>80){
+      setBaseSalary(getBaseSalary()+inc*.5);
+      System.out.println("$" + (int)(inc*.5) + " Increment approved.");
+    }
+    else System.out.println("Increment denied.");
+  }
+}
+
+
+public class Developer extends Employee{
+  String lang;
+  double tSalary;
+  
+  public Developer(String name, double baseSalary, int hoursWorked, String lang){
+    super(name, baseSalary, hoursWorked);
+    this.lang = lang;
+  }
+  
+  public void calculateSalary(){
+    tSalary = getBaseSalary();
+    if(lang.equals("Java")) tSalary += 700;
+  }
+  
+  public void displayInfo(){
+    super.displayInfo();
+    System.out.println("Language: " + lang);
+    System.out.println("Final Salary: $" + tSalary);
+  }
+}
+

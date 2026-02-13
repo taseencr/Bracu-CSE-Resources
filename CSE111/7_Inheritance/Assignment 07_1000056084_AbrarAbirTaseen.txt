@@ -1,0 +1,128 @@
+// TASK 1
+public class Cow extends Animal{
+  String name;
+  
+  public Cow(){
+    System.out.println("The cow says hello!");
+  }
+  
+  public String getName(){
+    return name;
+  }
+  
+  public void updateSound(String sound){
+    this.sound = sound;
+  }
+}
+
+
+
+// TASK 2
+public class CheckingAccount extends Account{
+  static int count;
+  
+  public CheckingAccount(double balance){
+    super(balance);
+    count++;
+  }
+  public CheckingAccount(){
+    super(0);
+    count++;
+  }
+  
+  public double showBalance(){
+    return balance;
+  }
+}
+
+
+
+// TASK 3
+public class Book extends Product{
+  String isbn;
+  String publisher;
+  
+  public Book(int id, String title, int price, String isbn, String publisher){
+    super(id, title, price);
+    this.isbn = isbn;
+    this.publisher = publisher;
+  }
+  
+  public String printDetail(){
+    System.out.println(getIdTitlePrice());
+    return "ISBN: " + isbn + " Publisher: " + publisher;
+  }
+}
+
+
+public class CD extends Product{
+  String band;
+  int duration;
+  String genre;
+  
+  public CD(int id, String title, int price, String band, int duration, String genre){
+    super(id, title, price);
+    this.band = band;
+    this.duration = duration;
+    this.genre = genre;
+  }
+  
+  public String printDetail(){
+    System.out.println(getIdTitlePrice());
+    return "Band: " + band + " Duration: " + duration + " minutes Genre: " + genre;
+  }
+}
+
+
+
+// TASK 4
+public class ComplexNumber extends RealNumber{
+  double imaginary;
+  
+  public ComplexNumber(){
+    super(1.0);
+    imaginary = 1.0;
+  }
+  public ComplexNumber(double real, double imaginary){
+    super(real);
+    this.imaginary = imaginary;
+  }
+  
+  public String details(){
+    return getReal() + "\nImaginaryPart: " + imaginary;
+  }
+}
+
+
+
+// TASK 5
+public class CSEStudent extends Student{
+  static int count;
+  static String courses[] = {"CSE110", "CSE111", "CSE220", "CSE221"};
+  
+  public CSEStudent(String n, int i){
+    super(n, i);
+    count++;
+  }
+  
+  public static void details(){
+    System.out.println("Total CSE Students: " + count);
+    System.out.println("Available Lab Based Courses: ");
+    for(int i=0; i<courses.length; i++){
+      System.out.print(courses[i] + " ");
+    }
+    System.out.println();
+  }
+  
+  public void addLabBasedCourse(String course){
+    int temp = -1;
+    for(int i=0; i<courses.length; i++){
+      if(courses[i].equals(course)) temp = i;
+    }
+    if(temp==-1) System.out.println("It is not a lab based course!");
+    else{
+      super.courses += courses[temp] + " ";
+    }
+  }
+}
+

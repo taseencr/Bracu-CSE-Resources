@@ -1,0 +1,255 @@
+// TASK 1
+public class Player{
+  String name;
+  int hp;
+  String villain[] = new String[5];
+  int count;
+  
+  public Player(String name, int hp){
+    this.name = name;
+    this.hp = hp;
+    System.out.println(name + " joined the game");
+    System.out.println("HP: " + hp);
+  }
+  public Player(String name){
+    this(name, 100);
+  }
+  
+  public void viewInfo(){
+    System.out.println("Player Name: " + name);
+    System.out.println("Current HP: " + hp);
+    if(count>0){
+      System.out.println("Defeated: ");
+      for(int i=0; i<count; i++){
+        System.out.print(villain[i] + ", ");
+      }
+      System.out.println();
+    }
+  }
+  
+  public void defeatVillain(String vil, int vhp){
+    if(vhp>hp) System.out.println("failed to defeat " + vil);
+    else{
+      hp += vhp;
+      villain[count] = vil;
+      count++;
+      System.out.println("defeated " + vil);
+    }
+  }
+  public void defeatVillain(int x, String vil, int vhp){
+    x = x-'0';
+    hp *= x;
+    System.out.println("HP with " + x + "x boost: " + hp);
+    defeatVillain(vil, vhp);
+  }
+  public void defeatVillain(Player vil){
+    defeatVillain(vil.name, vil.hp);
+  }
+}
+
+
+
+// TASK 2
+public class Student{
+  int id;
+  double cg;
+  String course[] = new String[4];
+  int count;
+  
+  public Student(int id){
+    this.id = id;
+    System.out.println("A student with ID " + id + " has been created.");
+  }
+  public Student(int id, double cg){
+    this.id = id;
+    this.cg = cg;
+    System.out.println("A student with ID " + id + " and cgpa " + cg + " has been created.");
+  }
+  
+  public void addCourse(String course){
+    if(cg==0){
+      System.out.println("Failed to add " + course);
+      System.out.println("Set CG first");
+    }
+    else if(cg<3){
+      if(count<3){
+        this.course[count] = course;
+        count++;
+      }
+      else{
+        System.out.println("Failed to add " + course);
+        System.out.println("CG is low. Can't add more than 3 courses.");
+      }
+    }
+    else if(count<4){
+      this.course[count] = course;
+      count++;
+    }
+    else{
+      System.out.println("Failed to add " + course);
+      System.out.println("Maximum 4 courses allowed.");
+    }
+  }
+  public void addCourse(String course[]){
+    for(int i=0; i<course.length; i++){
+      addCourse(course[i]);
+    }
+  }
+  
+  public void storeCG(double cg){
+    this.cg = cg;
+  }
+  public void storeID(int id){
+    this.id = id;
+  }
+  public void removeAllCourse(){
+    count=0;
+  }
+  
+  public void showAdvisee(){
+    System.out.println("Student ID: " + id + ", CGPA: " + cg);
+    if(count==0) System.out.println("No courses added.");
+    else{
+      System.out.println("Added courses are: ");
+      for(int i=0; i<count; i++){
+        System.out.print(course[i] + " ");
+      }
+      System.out.println();
+    }
+  }
+}
+
+
+
+// TASK 3
+public class Student{
+  String name;
+  int id;
+  String dept;
+  String email;
+  String password;
+  boolean status;
+  String courses[] = new String[3];
+  int count;
+  
+  public Student(String name,  int id, String dept){
+    this.name = name;
+    this.id = id;
+    this.dept = dept;
+    System.out.println("Student object is created");
+  }
+}
+
+
+public class Connect{
+  int totalAdvisee;
+  Student advisee[] = new Student[5];
+  
+  public Connect(){
+    System.out.println("Connect is ready to use!");
+  }
+  
+  public void login(Student std){
+    if(std.email==null || std.password==null) System.out.println("Email and password need to be set.");
+    else{
+      std.status = true;
+      System.out.println("Login successful");
+    }
+  }
+  
+  public void advising(Student std){
+    if(!std.status) System.out.println("Please login to advise courses!");
+    else{
+      System.out.println("You haven't selected any courses.");
+    }
+  }
+  public void advising(Student std, String c1, String c2, String c3, String c4){
+    System.out.println("You need special approval to take more than 3 courses.");
+  }
+  public void advising(Student std, String c1, String c2, String c3){
+    if(!std.status) System.out.println("Please login to advise courses!");
+    else{
+      std.courses[0] = c1;
+      std.courses[1] = c2;
+      std.courses[2] = c3;
+      advisee[totalAdvisee] = std;
+      totalAdvisee++;
+      System.out.println("Advising successful!");
+    }
+  }
+  
+  public void allAdviseeInfo(){
+    System.out.println("Total Advisee: " + totalAdvisee);
+    for(int i=0; i<totalAdvisee; i++){
+      System.out.println("Name: " + advisee[i].name + " ID: " + advisee[i].id);
+      System.out.println("Department: " + advisee[i].dept);
+      System.out.println("Advised Courses: ");
+      for(int j=0; j<3; j++){
+        System.out.print(advisee[i].courses[j] + " ");
+      }
+      System.out.println();
+      System.out.println("==============");
+    }
+  }
+}
+
+
+
+// TASK 4
+public class TravelPrep{
+  String name = "Unknown package";
+  int cost = 1250;
+  TravelPrep pack[] = new TravelPrep[3];
+  int count;
+  String t_name;
+  
+  public TravelPrep(){
+    System.out.println(name + " would cost at most " + cost + " yen");
+  }
+  public TravelPrep(String name, int cost){
+    this.name = name;
+    this.cost = cost;
+    System.out.println(name + " would cost at most " + cost + " yen");
+  }
+  
+  public TravelPrep(String n1, String n2){
+    name = n1 + " " + n2;
+    cost = 300;
+    System.out.println(name + " costs " + cost + " yen");
+  }
+  public TravelPrep(String n1, String n2, int cost){
+    name = n2 + " " + n1;
+    this.cost = cost;
+    System.out.println(name + " costs " + cost + " yen");
+  }
+  
+  public void add_to_itinerary(TravelPrep obj){
+    if(cost>=obj.cost){
+      pack[count] = obj;
+      cost -= obj.cost;
+      count++;
+    }
+    else System.out.println("Budget going overboard");
+  }
+  public void add_to_itinerary(TravelPrep obj1, TravelPrep obj2){
+    add_to_itinerary(obj1);
+    add_to_itinerary(obj2);
+  }
+  
+  public void show_itinerary(){
+    int total = 0;
+    if(name.equals("Unknown package")) System.out.println("Itinerary for " + t_name);
+    else System.out.println("Itinerary for " + name);
+    for(int i=0; i<count; i++){
+      System.out.println((i+1) + ". " + pack[i].name + " - " + pack[i].cost + " yen");
+      total += pack[i].cost;
+    }
+    System.out.println("Total cost of " + count + " destinations: " + total + " yen");
+  }
+  
+  public String updateCost(int cost){
+    this.cost += cost;
+    return "Cost of " + name + " updated to " + this.cost;
+  }
+}
+

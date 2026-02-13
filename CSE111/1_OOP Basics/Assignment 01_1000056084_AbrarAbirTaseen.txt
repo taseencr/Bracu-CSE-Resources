@@ -1,0 +1,86 @@
+// TASK 1
+import java.util.Scanner;
+
+public class task1{
+  public static void main(String[] args){
+    Scanner sc = new Scanner(System.in);
+    int a = sc.nextInt();
+    int b = sc.nextInt();
+    int count = 0;
+    
+    if(a>b){
+      int temp = b;
+      b = a;
+      a = temp;
+    }
+    
+    for(int i=a; i<=b; i++){
+      int counter = 0;
+      for(int j=1; j<i; j++){
+        if(i%j==0) counter++;
+      }
+      if(counter<2) count++;
+    }
+    System.out.println("There are " + count + " prime numbers between " + a + " and " + b + ".");
+  }
+}
+
+
+
+// TASK 2
+import java.util.Scanner;
+
+public class task2{
+  public static void main(String[] args){
+    Scanner sc = new Scanner(System.in);
+    String txt = sc.nextLine();
+    String result = "";
+    
+    for(int i=0; i<txt.length(); i++){
+      char ch = txt.charAt(i);
+      if(ch=='a') result += 'z';
+      else result += (char)(ch-1);
+    }
+    System.out.println(result);
+  }
+}
+
+
+
+// TASK 3
+import java.util.Scanner;
+
+public class task3{
+  public static void main(String[] args){
+    Scanner sc = new Scanner(System.in);
+    System.out.print("N = ");
+    int n = sc.nextInt();
+    int arr[] = new int[n];
+    
+    for(int i=0; i<arr.length; i++){
+      arr[i] = sc.nextInt();
+    }
+    
+    for(int i=0; i<arr.length; i++){
+      int a = arr[i];
+      int count = 0;
+      boolean isDuplicate = false;
+      for(int j=0; j<i; j++){
+        if(arr[j]==a) isDuplicate = true;
+      }
+      for(int k=0; k<arr.length; k++){
+        if(arr[k]==a) count++;
+      }
+      if(!isDuplicate) System.out.println(a + " - " + count + " times");
+    }
+  }
+}
+
+
+
+// TASK 4
+public class CSECourse{
+  String courseName = "Programming Language II";
+  String courseCode = "CSE111";
+  int credit = 3;
+}
